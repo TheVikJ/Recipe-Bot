@@ -11,7 +11,11 @@ url = "https://api.spoonacular.com/recipes/"
 async def on_message(message):
   if message.author == client.user:
     return
-
+  
+  if message.content.startswith('!help'):
+    msg = "!random: random recipe\n!diet <diet>: recipes for specific diet\n!cuisine <cuisine> recipes from a specific cuisine\n!intolerance <intolerance>: recipes without intolerances\n!ingredients <ingredient1>,<ingredient2>...: recipes with certain ingredients\n!search <term1>,<term2>...: recipes from search terms"
+    await message.channel.send(msg)
+    
   if message.content.startswith('!random'):
     response = json.loads(requests.get(url + "random?apiKey=" + spoonacular).text)
     print(response)
